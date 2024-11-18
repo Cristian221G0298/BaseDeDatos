@@ -1,0 +1,28 @@
+﻿<Window x:Class="BDFlores.Views.MainFlorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BDFlores.Views"
+        xmlns:viewmodel="clr-namespace:BDFlores.ViewModels"
+        mc:Ignorable="d"
+        Title="MainFlorView" Height="450" Width="800" Background="#8AA236">
+    <Window.DataContext>
+        <viewmodel:FlorViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <local:DatosFlorView></local:DatosFlorView>
+        <local:DetallesFlorView>
+            <local:DetallesFlorView.Style>
+                <Style TargetType="UserControl">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Vista}" Value="{x:Static viewmodel:Vista.Flor}">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </local:DetallesFlorView.Style>
+        </local:DetallesFlorView>
+    </Grid>
+</Window>

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="BDFlores.Views.DatosFlorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BDFlores.Views"
+             xmlns:viewmodel="clr-namespace:BDFlores.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" FontFamily="Tahoma" VerticalAlignment="Center" Foreground="#E5F5A3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">FLORERÍA JAZMÍN</TextBlock>
+        <ListBox HorizontalAlignment="Center" Padding="10" Margin="10"
+               ItemsSource="{Binding Datos}" 
+              SelectedItem="{Binding Flor}" 
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+               Name="ucDetalle">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:FlorView Height="150" Margin="5"
+                                  Width="150" Padding="10"
+                                  Background="#E5F5A3" >
+                        <local:FlorView.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick"
+                        Command="{Binding ElementName=ucDetalle, Path=DataContext.CambiarVistaCommand}"
+                        CommandParameter="{x:Static viewmodel:Vista.Flor}"></MouseBinding>
+                        </local:FlorView.InputBindings>
+                    </local:FlorView>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </DockPanel>
+</UserControl>
